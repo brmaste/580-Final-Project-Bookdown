@@ -1,4 +1,4 @@
-# Geospatial1
+# Geospatial 1
 
 ```{r setup, include=FALSE}
 library(tidyverse) # Tidy packages

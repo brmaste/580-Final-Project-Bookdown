@@ -8,8 +8,10 @@ site: bookdown::bookdown_site
 
 # Introduction
 
-This bookdown contains the first five assignments for ESS-580A7, Introduction to Environmental Data Science class, at Colorado State University for Spring 2022. Assignments were composed by professors Matt Ross and Nathan Mueller. The first part of each chapter is the original code as provided by the professor with my original answers for the assignments.  
+This bookdown contains the first five assignments for ESS-580A7, Introduction to Environmental Data Science class, at Colorado State University for Spring 2022. Assignments were composed by professors Matt Ross and Nathan Mueller. The first part of each chapter is the original code as provided by the professor with my original answers for the assignments. 
 
+
+Thanks Matt and Nathan!
 ```{r bookdown library install, eval=FALSE, warning=FALSE, include=FALSE}
 install.packages("bookdown")
 

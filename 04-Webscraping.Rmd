@@ -1,5 +1,7 @@
 # Webscraping, iterations, and functions
 
+*Composed by Matt Ross*
+
 ```{r setup, include=FALSE}
 library(rvest)
 library(tidyverse)
@@ -12,14 +14,14 @@ library(kableExtra)
 ```
 
 
-# Simple web scraping
+## Simple web scraping
 
 R can read html using either rvest, xml, or xml2 packages. Here we are going to navigate to the Center for Snow and Avalance Studies  [Website](https://snowstudies.org/archived-data/) and read a table in. This table contains links to data we want to programatically download for three sites. We don't know much about these sites, but they contain incredibly rich snow, temperature, and precip data. 
 
 
-## Reading an html 
+### Reading an html 
 
-### Extract CSV links from webpage
+#### Extract CSV links from webpage
 
 ```{r}
 site_url <- 'https://snowstudies.org/archived-data/'
@@ -42,9 +44,9 @@ links <- webpage %>%
 
 ```
 
-## Data Download
+### Data Download
 
-### Download data in a for loop
+#### Download data in a for loop
 
 ```{r}
 
@@ -65,7 +67,7 @@ evaluate <- !all(downloaded)
 ```
 
 
-### Download data in a map
+#### Download data in a map
 
 ```{r}
 
@@ -75,9 +77,9 @@ if(evaluate == T){
 
 ```
 
-## Data read-in 
+### Data read-in 
 
-### Read in just the snow data as a loop
+#### Read in just the snow data as a loop
 
 ```{r}
 
@@ -98,7 +100,7 @@ snow_files <- file_names %>%
 ```
 
 
-### Read in the data as a map function
+#### Read in the data as a map function
 
 ```{r}
 
@@ -117,7 +119,7 @@ snow_data_full <- map_dfr(snow_files,our_snow_reader)
 ```
 
 
-### Plot snow data
+#### Plot snow data
 
 ```{r}
 snow_yearly <- snow_data_full %>%
@@ -131,9 +133,9 @@ ggplot(snow_yearly,aes(x=Year,y=mean_height,color=site)) +
 ```
 
 
-# Assignment:
+## Assignment
 
-## 1 
+### Question 1: 
 Extract the meteorological data URLs. Here we want you to use the `rvest` package to get the URLs for the `SASP forcing` and `SBSP_forcing` meteorological datasets.
 
 
@@ -153,7 +155,7 @@ links_met <- webpage %>%
 ```
 
 
-## 2 
+### Question 2: 
 Download the meteorological data. Use the `download_file` and `str_split_fixed` commands to download the data and save it in your data folder. You can use a for loop or a map function. 
 
 ```{r, warning=F,message=F}
@@ -177,7 +179,7 @@ downloaded_met <- file.exists(file_names_met)
 
 ```
 
-## 3 
+### Question 3: 
 Write a custom function to read in the data and append a site column to the data. 
 
 ```{r, warning=F,message=F}
@@ -210,7 +212,7 @@ our_met_reader <- function(file){
 
 ```
 
-## 4 
+### Question 4: 
 Use the `map` function to read in both meteorological files. Display a summary of your tibble.
 
 ```{r, warning=F,message=F}
@@ -227,7 +229,7 @@ head(met_data_full) %>%
 ```
 
 
-## 5 
+### Question 5:
 Make a line plot of mean temp by year by site (using the `air temp [K]` variable). Is there anything suspicious in the plot? Adjust your filtering if needed.
 
 
@@ -252,7 +254,7 @@ ggplot(mean_a_t_k,aes(x=year,y=mean_a_t_k,color=siteID)) +
 
 
 
-## 6 
+### Question 6: 
 Write a function that makes line plots of monthly average temperature at each site for a given year. Use a for loop to make these plots for 2005 to 2010. Are monthly average temperatures at the Senator Beck Study Plot ever warmer than the Snow Angel Study Plot?
 Hint: https://ggplot2.tidyverse.org/reference/print.ggplot.html
 
@@ -287,9 +289,9 @@ for (yr in years){
 
 ```
 
-# Bonus:
+## Bonus
 
-## Bonus 1
+### Bonus 1:
 Make a plot of average daily precipitation by day of year (averaged across all available years). Color each site. 
 
 *Site specific precipitation was unavailable, so the precipitation shown is for both Senator Beck and Swamp Angel study sites. Average precipitation follows a typical annual cycle for the Southern Rocky Mountains, with higher seasonal precipitation in the late summer.* 
@@ -313,7 +315,7 @@ ggplot(precip,aes(x=doy,y=average_precip)) +
 ```
 
 
-## Bonus 2 
+### Bonus 2: 
 Use a function and for loop to create yearly plots of precipitation by day of year. Color each site. 
 
 *Site specific precipitation was unavailable, so the precipitation shown is for both Senator Beck and Swamp Angel study sites. Precipitation for 2005-2011 follows a typical annual cycle for the Southern Rocky Mountains, with higher seasonal precipitation in mid to late summer.*

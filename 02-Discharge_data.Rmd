@@ -1,5 +1,6 @@
 # Discharge Data Example
 
+*Composed by Matt Ross*
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -12,7 +13,7 @@ library(revealjs)
 ```
 
 
-# Methods
+## Methods
 
 The Poudre River at Lincoln Bridge is:
 
@@ -25,14 +26,14 @@ The Poudre River at Lincoln Bridge is:
   - **Downstream of many agricultral diversions**
 
 
-## SiteDescription
+### SiteDescription
 
 ![](https://waterdata.usgs.gov/nwisweb/local/state/co/text/pics/06752260big.jpg)
 
 
-## Data Acquisition and Plotting tests
+### Data Acquisition and Plotting tests
 
-### Data Download
+#### Data Download
 
 
 ```{r downloader}
@@ -48,7 +49,7 @@ q <- readNWISdv(siteNumbers = '06752260',
 
 
 
-### Static Data Plotter
+#### Static Data Plotter
 
 
 ```{r, warning = FALSE, fig.width = 8, fig.height = 5}
@@ -61,7 +62,7 @@ ggplot(q, aes(x = Date, y = q)) +
 ```
 
 
-### Interactive Data Plotter
+#### Interactive Data Plotter
 
 
 ```{r}
@@ -75,7 +76,7 @@ dygraph(q_xts) %>%
 
 
 
-# Assignment 
+## Assignment 
 
 
 This assignment will be primarily about demonstrating some expertice in using
@@ -109,7 +110,7 @@ todays date, not just a static date you enter.
 `revealjs` package. Add link to your original report-style document. 
 
 
-## DyGraph example 
+### DyGraph example 
 
 ```{r}
 
@@ -122,10 +123,10 @@ dygraph(q_xts) %>%
 
 ```
 
-## Poudre Paragraph
+### Poudre Paragraph
 
 My grandmother has always claimed that her grandfather lost the farm when the water he ordered was not delivered. I looked into this after an introductory class on Colorado Water Law (AREC 342!) and was able to determine that my immigrant great-great-grandfather, Paul Smith, was the secretary of Buckeye Lateral Ditch Company from sometime in the mid 1920s to the 1940s. [His name](https://archives.mountainscholar.org/digital/collection/p17393coll186/id/13436/rec/1) is mentioned through correspondence with the Northern Poudre Irrigation Company, who used ditch riders allocating water to the [Buckeye Lateral](https://dwr.state.co.us/Tools/Structures/0301111). Paul had *50 shares* of the water right, which came off a [diversion](https://npicwater.files.wordpress.com/2015/08/repair-of-structure-along-the-buckeye-lateral.jpg) from Boxelder Creek, which is fed by the Park Creek Reservoir, which is fed itself by the **North Fork of the Cache la Poudre River.** Allocation records kept by the Northern Poudre Irrigation Company indicate that perhaps he did not lose the farm (being secretary of the ditch company) but rather that, given his age, he **retired and sold the farm.** 
 
-## Presentation Version Link
+### Presentation Version Link
 
 [Link to "revealjs" presentation file](https://brmaste.github.io/1_rmarkdown_examples/index_talk#/)

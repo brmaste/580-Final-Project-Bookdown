@@ -1,6 +1,8 @@
 # Hayman Fire Recovery
  
-```{r setup, warning=F,message=F}
+*Composed by Matt Ross* 
+ 
+```{r setup, warning=F,message=F, include=F}
 library(tidyverse)
 library(tidyr)
 library(ggthemes)
@@ -16,7 +18,7 @@ knitr::opts_knit$set(root.dir='..')
 ```{r dataread, warning=F,message=F}
 ####---- Reading in Data and Stacking it -----####
 #Reading in files
-#I couldn't knit this with the pathway used, so I used the entire file pathway
+#Couldn't knit this with the pathway used, so the entire file pathway was used.
 files <- list.files('C:/Users/13074/Documents/ESS580/2_fire_data_wrangle/data',full.names=T)
 
 #Read in individual data files
@@ -40,7 +42,9 @@ full_long <- rbind(ndvi,ndmi,ndsi) %>%
 
 ```
 
-## Question 1: 
+## Assignment 
+
+### Question 1: 
 
 What is the correlation between NDVI and NDMI? - here I want you to
 convert the full_long dataset in to a wide dataset using the 
@@ -69,7 +73,7 @@ ggplot(summer_fw, aes(x= ndmi, y= ndvi, color = site)) +
 
 ```
 
-## Question 2: 
+### Question 2: 
 
 2) What is the correlation between average NDSI (normalized
  snow index) for January - April and average NDVI for June-August?
@@ -108,7 +112,7 @@ ggplot(winter_summer, aes(x= ave_ndsi, y= ave_ndvi, color = site)) +
 
 ```
 
-## Question 3:
+### Question 3:
 
 How is the snow effect from question 2 different between pre- and post-burn
 and burned and unburned? 
@@ -130,7 +134,7 @@ ggplot(pre_post_winter_summer, aes(x= ave_ndsi, y= ave_ndvi, color = site)) +
 
 ```
 
-## Question 4:
+### Question 4:
 
 What month is the greenest month on average? 
 
@@ -152,7 +156,7 @@ ggplot(green_fw, aes(x= month, y= green)) +
 
 ```
 
-## Question 5: 
+### Question 5: 
 
 What month is the snowiest on average?
 
@@ -174,7 +178,7 @@ ggplot(snow_fw, aes(x= month, y= snow)) +
 
 ```
 
-## Bonus Question: 
+### Bonus Question: 
 Redo all problems with `spread` and `gather` using modern tidyverse syntax. 
 
 *Gather was initially used when reading in and stacking data, while spread was used in Question 1. The pertinent lines of code are replaced below:*

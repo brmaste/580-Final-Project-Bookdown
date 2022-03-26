@@ -1,5 +1,7 @@
 # Geospatial 1
 
+*Composed by Matt Ross*
+
 ```{r setup, include=FALSE}
 library(tidyverse) # Tidy packages
 library(sf) #Spatial package that can read and create shapefiles 
@@ -13,10 +15,10 @@ library(ggthemes)
 ## LAGOS Analysis
 
 
-## Loading in data
+### Loading in data
 
 
-### First download and then specifically grab the locus (or site lat longs)
+#### First download and then specifically grab the locus (or site lat longs)
 
 ```{r data-read}
 # #Lagos download script
@@ -36,8 +38,8 @@ lake_centers <- lagos$locus
 ```
 
 
+#### Convert to spatial data
 
-### Convert to spatial data
 ```{r}
 #Look at the column names
 #names(lake_centers)
@@ -71,7 +73,7 @@ mapview(subset_spatial)
 ```
 
 
-### Subset to only Minnesota
+#### Subset to only Minnesota
 
 ```{r}
 states <- us_states()
@@ -96,10 +98,10 @@ minnesota_lakes %>%
 
 
 
-# In-Class work
+## Assignment
 
-
-## 1) Show a map outline of Iowa and Illinois (similar to Minnesota map upstream)
+### Question 1:
+Show a map outline of Iowa and Illinois (similar to Minnesota map upstream)
 
 ```{r}
 #subsetting Iowa and Illinois
@@ -114,7 +116,8 @@ mapview(iowa_illinois)
 
 
 
-## 2) Subset LAGOS data to these sites, how many sites are in Illinois and Iowa
+### Question 2:
+Subset LAGOS data to these sites, how many sites are in Illinois and Iowa
 combined? How does this compare to Minnesota?
 
 *Combined, Iowa and Illinois have 16466 lakes, while Minnesota has an additional 12572 lakes for a total of 29038 lakes by itself.* 
@@ -132,7 +135,8 @@ nrow(minnesota_lakes)-nrow(ia_il_lakes)
 ```
 
 
-## 3) What is the distribution of lake size in Iowa vs. Minnesota?
+### Question 3:
+What is the distribution of lake size in Iowa vs. Minnesota?
 
 - Here I want to see a histogram plot with lake size on x-axis and frequency on 
 y axis (check out geom_histogram)
@@ -162,7 +166,8 @@ ggplot(ia_mn_lakes,aes(lake_area_ha, fill = name, color = name)) +
 ```
 
 
-## 4) Make an interactive plot of lakes in Iowa and Illinois and color them
+### Question 4:
+Make an interactive plot of lakes in Iowa and Illinois and color them
 by lake area in hectares
 
 *Plot shows the largest 500 lakes according to size (ha) in Iowa and Illinois.* 
@@ -178,7 +183,8 @@ ia_il_lakes %>%
 ```
 
 
-## 5) What other data sources might we use to understand how reservoirs and 
+### Question 5:
+What other data sources might we use to understand how reservoirs and 
 natural lakes vary in size in these three states? 
 
 *Lakes vary in size (both in terms of surface area and volume) over time. Each of the three states' Department of Natural Resources are responsible for the maintenance of water body data. Additionally, the USGS's Water Resources Mission Area had spatial data related to reservoir and lake size, as well as the NWIS Mapper and NSDI Water Node. The EPA's LAKECAT seems to have related data too.*

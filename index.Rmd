@@ -1,13 +1,16 @@
 --- 
 title: "580 Final Project Bookdown"
 author: "Brian Steen"
-date: "`r Sys.Date()`"
+date: "2022-03-25"
+#date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
 # Introduction
 
-```{r library install, eval=FALSE}
+This bookdown contains the first five assignments for ESS-580A7, Introduction to Environmental Data Science class, at Colorado State University for Spring 2022. Assignments were composed by professors Matt Ross and Nathan Mueller. The first part of each chapter is the original code as provided by the professor with my original answers for the assignments.  
+
+```{r bookdown library install, eval=FALSE, warning=FALSE, include=FALSE}
 install.packages("bookdown")
 
 

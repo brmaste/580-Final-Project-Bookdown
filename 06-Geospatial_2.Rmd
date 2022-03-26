@@ -12,13 +12,13 @@ library(kableExtra)
 ```
 
 
-# LAGOS Analysis
+## LAGOS Analysis
 
 
-## Loading in data
+### Loading in data
 
 
-### First download and then specifically grab the locus (or site lat longs)
+#### First download and then specifically grab the locus (or site lat longs)
 ```{r data-read, warning=F,message=F}
 #Lagos download script
 #lagosne_get(dest_folder = LAGOSNE:::lagos_path(),overwrite=T)
@@ -41,7 +41,7 @@ nutr <- lagos$epi_nutr
 names(nutr)
 ```
 
-### Subset columns nutr to only keep key info that we want
+#### Subset columns nutr to only keep key info that we want
 
 
 ```{r}
@@ -52,7 +52,7 @@ clarity_only <- nutr %>%
 ```
 
 
-### Keep sites with at least 200 observations 
+#### Keep sites with at least 200 observations 
 
 ```{r}
 
@@ -77,7 +77,7 @@ chla_secchi_200 <- chla_secchi %>%
 ```
 
 
-### Join water quality data to spatial data
+#### Join water quality data to spatial data
 
 ```{r}
 spatial_200 <- inner_join(spatial_lakes,chla_secchi_200 %>%
@@ -87,7 +87,7 @@ spatial_200 <- inner_join(spatial_lakes,chla_secchi_200 %>%
 
 ```
 
-### Mean Chl_a map
+#### Mean Chl_a map
 
 ```{r}
 ### Take the mean chl_a and secchi by lake
@@ -113,9 +113,10 @@ mapview(mean_spatial,zcol='log10_mean_chl')
 ```
 
 
-# Class work
+## Assignment
 
-## 1) What is the correlation between Secchi Disk Depth and Chlorophyll a for
+### Question 1a: 
+What is the correlation between Secchi Disk Depth and Chlorophyll a for
 sites with at least 200 observations?
 
 - Here, I just want a plot of chla vs secchi for all sites 
@@ -132,18 +133,20 @@ ggplot(chla_secchi_200,aes(x=chla,y=secchi)) +
 
 ```
 
-
-## Why might this be the case? 
+### Question 1.a:
+Why might this be the case? 
 
 *As chlorophyll A increases, depths at which a Secchi disk can be observed decrease. This is seen in the figure where the fewer the amounts of chlorophyll A increases the depths of the Secchi disk observations.*
 
-## 2) What states have the most data? 
+### Question 2:
+What states have the most data? 
 
 *Since this assignment is the "Lake Water Quality Analysis," I'm assuming this question means different water quality parameters from the "nutr" category.*
 
 *According to the table below, Minnesota has the highest number of water quality observations (358,137), followed by Wisconsin (145,910), with Michigan having the third highest (100,683).*
 
-### 2a) First you will need to make a lagos spatial dataset that has the total 
+### Question 2a:
+First you will need to make a lagos spatial dataset that has the total 
 number of counts per site.
 
 ```{r, warning=F,message=F}
@@ -160,7 +163,8 @@ join_spatial_nutr <- inner_join(spatial_lakes,nutr_count,
 ```
 
 
-### 2b) Second, you will need to join this point dataset to the us_boundaries 
+### Question 2b:
+Second, you will need to join this point dataset to the us_boundaries 
 data. 
 
 ```{r, warning=F,message=F}
@@ -173,7 +177,8 @@ state_nutr_counts <- st_join(states, join_spatial_nutr)
 ```
 
 
-### 2c) Then you will want to group by state and sum all the observations in that
+### Question 2c:
+Then you will want to group by state and sum all the observations in that
 state and arrange that data from most to least toatl observations per state. 
 
 ```{r, warning=F,message=F}
@@ -191,7 +196,8 @@ head(sum_nutr_state) %>%
 
 ```
 
-## 3) Is there a spatial pattern in Secchi disk depth for lakes with at least 200 
+### Question 3: 
+Is there a spatial pattern in Secchi disk depth for lakes with at least 200 
 observations?
 
 *There is not an obvious spatial pattern for Secchi disk depth by looking at depths spatially, other than lakes with at least 200 observations appear to be close to large population centers which likely rely on the lakes and reservoirs for water (excluding the lakes in Northern Wisconsin).*

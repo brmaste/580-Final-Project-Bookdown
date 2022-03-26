@@ -129,7 +129,7 @@ nassqs_auth(key = "57FECF56-EF93-3934-9605-C65BB379D321")
 ```
 
 
-```{r yield download, warning=FALSE}
+```{r yield download, warning=FALSE, include=FALSE}
 #set our API key with NASS in previous code chunk (ommited) 
 # parameters to query on 
 params <- list(commodity_desc = "CORN", util_practice_desc = "GRAIN", prodn_practice_desc = "ALL PRODUCTION PRACTICES", year__GE = 1981, state_alpha = "IA")

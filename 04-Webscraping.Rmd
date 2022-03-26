@@ -1,0 +1,350 @@
+# Webscraping, iterations, and functions
+
+```{r setup, include=FALSE}
+library(rvest)
+library(tidyverse)
+library(lubridate)
+library(readxl)
+library(ggthemes)
+library(knitr)
+library(kableExtra)
+
+```
+
+
+# Simple web scraping
+
+R can read html using either rvest, xml, or xml2 packages. Here we are going to navigate to the Center for Snow and Avalance Studies  [Website](https://snowstudies.org/archived-data/) and read a table in. This table contains links to data we want to programatically download for three sites. We don't know much about these sites, but they contain incredibly rich snow, temperature, and precip data. 
+
+
+## Reading an html 
+
+### Extract CSV links from webpage
+
+```{r}
+site_url <- 'https://snowstudies.org/archived-data/'
+
+#Read the web url
+webpage <- read_html(site_url)
+
+#See if we can extract tables and get the data that way
+tables <- webpage %>%
+  html_nodes('table') %>%
+  magrittr::extract2(3) %>%
+  html_table(fill = TRUE)
+#That didn't work, so let's try a different approach
+
+#Extract only weblinks and then the URLs!
+links <- webpage %>%
+  html_nodes('a') %>%
+  .[grepl('24hr',.)] %>%
+  html_attr('href')
+
+```
+
+## Data Download
+
+### Download data in a for loop
+
+```{r}
+
+splits <- str_split_fixed(links,'/',8)
+
+dataset <- splits[,8] 
+
+file_names <- paste0('C:/Users/13074/Documents/ESS580/3_snow_functions_iteration/data',dataset)
+
+for(i in 1:3){
+  download.file(links[i],destfile=file_names[i])
+}
+
+downloaded <- file.exists(file_names)
+
+evaluate <- !all(downloaded)
+
+```
+
+
+### Download data in a map
+
+```{r}
+
+if(evaluate == T){
+  map2(links[1:3],file_names[1:3],download.file)
+}else{print('data already downloaded')}
+
+```
+
+## Data read-in 
+
+### Read in just the snow data as a loop
+
+```{r}
+
+snow_files <- file_names %>%
+  .[!grepl('SG_24',.)] %>%
+  .[!grepl('PTSP',.)]
+
+#empty_data <- list()
+
+# snow_data <- for(i in 1:length(snow_files)){
+#   empty_data[[i]] <- read_csv(snow_files[i]) %>%
+#     select(Year,DOY,Sno_Height_M)
+# }
+
+#snow_data_full <- do.call('rbind',empty_data)
+
+#summary(snow_data_full)
+```
+
+
+### Read in the data as a map function
+
+```{r}
+
+our_snow_reader <- function(file){
+  name = str_split_fixed(file,'/',7)[,7] %>%
+    gsub('_24hr.csv','',.) %>% 
+    gsub('data', '',.)
+  df <- read_csv(file) %>%
+    select(Year,DOY,Sno_Height_M) %>%
+    mutate(site = name)
+}
+
+snow_data_full <- map_dfr(snow_files,our_snow_reader)
+
+#summary(snow_data_full)
+```
+
+
+### Plot snow data
+
+```{r}
+snow_yearly <- snow_data_full %>%
+  group_by(Year,site) %>%
+  summarize(mean_height = mean(Sno_Height_M,na.rm=T))
+
+ggplot(snow_yearly,aes(x=Year,y=mean_height,color=site)) + 
+  geom_point() +
+  ggthemes::theme_few() + 
+  ggthemes::scale_color_few()
+```
+
+
+# Assignment:
+
+## 1 
+Extract the meteorological data URLs. Here we want you to use the `rvest` package to get the URLs for the `SASP forcing` and `SBSP_forcing` meteorological datasets.
+
+
+```{r, warning=F,message=F}
+
+site_url <- 'https://snowstudies.org/archived-data/'
+
+#Read the web url
+webpage <- read_html(site_url)
+
+#Extract only weblinks and then the URLs!
+links_met <- webpage %>%
+  html_nodes('a') %>%
+  .[grepl('forcing',.)] %>%
+  html_attr('href')
+
+```
+
+
+## 2 
+Download the meteorological data. Use the `download_file` and `str_split_fixed` commands to download the data and save it in your data folder. You can use a for loop or a map function. 
+
+```{r, warning=F,message=F}
+
+#Grab only the name of the file by splitting out on forward slashes
+splits_met <- str_split_fixed(links_met,'/',8)
+
+#Keep only the 8th column
+dataset_met <- splits_met[,8] 
+
+#generate a file list for where the data goes
+file_names_met <- paste0('C:/Users/13074/Documents/ESS580/3_snow_functions_iteration/data',dataset_met)
+
+
+#This for loop takes the links_met list and adds a destination to it.
+for(i in 1:2){
+  download.file(links_met[i],destfile=file_names_met[i])
+}
+
+downloaded_met <- file.exists(file_names_met)
+
+```
+
+## 3 
+Write a custom function to read in the data and append a site column to the data. 
+
+```{r, warning=F,message=F}
+
+# this code grabs the variable names from the metadata pdf file
+library(pdftools)
+headers <- pdf_text('https://snowstudies.org/wp-content/uploads/2022/02/Serially-Complete-Metadata-text08.pdf') %>%
+  readr::read_lines(.) %>%
+  trimws(.) %>%
+  str_split_fixed(.,'\\.',2) %>%
+  .[,2] %>%
+  .[1:26] %>%
+  str_trim(side = "left")
+
+#headers
+
+file_names_met[]
+
+file <- file_names_met[1]
+
+# Reads in the data
+our_met_reader <- function(file){
+  name = str_split_fixed(file,'_',5)[,5] %>% 
+    gsub('SP_Forcing_Data.txt','',.)
+    df <- read_fwf(file) %>%
+      setNames(headers) %>% 
+    mutate(siteID =name)
+
+}
+
+```
+
+## 4 
+Use the `map` function to read in both meteorological files. Display a summary of your tibble.
+
+```{r, warning=F,message=F}
+
+file_names_met
+
+met_data_full <- map_dfr(file_names_met,our_met_reader)
+
+head(met_data_full) %>% 
+  kable(.,'html') %>%
+  kable_styling() %>%
+  scroll_box(width='800px',height='300px')
+
+```
+
+
+## 5 
+Make a line plot of mean temp by year by site (using the `air temp [K]` variable). Is there anything suspicious in the plot? Adjust your filtering if needed.
+
+
+*Some of the sensors seemed to be offline during 2003-2004 which was affecting the temperature sensor. These years were filtered out.* *Air temperature across both Senator Beck and Swamp Angel sites show increases in temperature during the period of record. Similarity in temperature patterns are likely due to the sites' proximity to each other.*
+
+```{r, warning=F,message=F}
+
+mean_a_t_k <- met_data_full %>%
+  rename(air_temp_K = "air temp [K]") %>%
+  filter(year > 2004) %>% 
+  group_by(year,siteID) %>%
+  summarize(mean_a_t_k = mean(air_temp_K,na.rm=T))
+
+ggplot(mean_a_t_k,aes(x=year,y=mean_a_t_k,color=siteID)) + 
+  geom_point(size = 3) +
+  theme_base() + 
+  scale_color_few() +
+  geom_smooth(method=lm) +
+  labs(x='Year', y="Air Temperature [K]")
+  
+```
+
+
+
+## 6 
+Write a function that makes line plots of monthly average temperature at each site for a given year. Use a for loop to make these plots for 2005 to 2010. Are monthly average temperatures at the Senator Beck Study Plot ever warmer than the Snow Angel Study Plot?
+Hint: https://ggplot2.tidyverse.org/reference/print.ggplot.html
+
+*Both Swamp Angel Senator Beck sites demonstrate temperature fluctuation typical of high elevation locations in the northern hemisphere. Similarity in temperature patterns are likely due to the sites' proximity to each other.*
+
+```{r, warning=F,message=F}
+
+plot_figure_k <- function(df, year) {
+mean_month_a_t_k <- df %>%
+  rename(air_temp_K = "air temp [K]") %>%
+  mutate(month = month(month, label = FALSE)) %>% 
+  filter(yr == year) %>% 
+  group_by(year,month,siteID) %>%
+  summarize(mean_a_t_k = mean(air_temp_K,na.rm=T)) 
+  
+figure_k <-
+ ggplot(mean_month_a_t_k,aes(x=month,y=mean_a_t_k,color=siteID)) + 
+  geom_line(size = 1) +
+  theme_base() + 
+  scale_color_few() +
+  labs(x='Month', y="Air Temp [K]") +
+  facet_wrap(~year)
+  
+print(figure_k)
+}
+
+years <- c(2005:2011)
+
+for (yr in years){
+  plot_figure_k(met_data_full, year)
+}
+
+```
+
+# Bonus:
+
+## Bonus 1
+Make a plot of average daily precipitation by day of year (averaged across all available years). Color each site. 
+
+*Site specific precipitation was unavailable, so the precipitation shown is for both Senator Beck and Swamp Angel study sites. Average precipitation follows a typical annual cycle for the Southern Rocky Mountains, with higher seasonal precipitation in the late summer.* 
+
+```{r, warning=F,message=F}
+
+precip <- met_data_full %>% 
+  mutate(date = make_date(year, month, day)) %>% 
+  mutate(date = as.Date(date))%>% 
+  mutate(doy = yday(date)) %>% 
+  rename(precip_unit_area = "precip [kg m-2 s-1]") %>%
+  mutate(precip_mm = precip_unit_area*86400) %>% 
+  group_by(doy) %>% 
+  summarise(average_precip = mean(precip_mm))
+
+ggplot(precip,aes(x=doy,y=average_precip)) + 
+  geom_point(size = 2, color="blue") +
+  theme_base() + 
+  labs(x='Day of Year', y="Average Precipitation (mm)")
+
+```
+
+
+## Bonus 2 
+Use a function and for loop to create yearly plots of precipitation by day of year. Color each site. 
+
+*Site specific precipitation was unavailable, so the precipitation shown is for both Senator Beck and Swamp Angel study sites. Precipitation for 2005-2011 follows a typical annual cycle for the Southern Rocky Mountains, with higher seasonal precipitation in mid to late summer.*
+
+```{r, warning=F,message=F}
+
+plot_figure_prcp <- function(df, year) {
+precip_doy <- df %>%
+  mutate(date = make_date(year, month, day)) %>% 
+  mutate(date = as.Date(date))%>% 
+  mutate(doy = yday(date)) %>%
+  filter(yr == year) %>% 
+  rename(precip_unit_area = "precip [kg m-2 s-1]") %>%
+  mutate(precip_mm = precip_unit_area*86400) %>% 
+  group_by(doy, year)
+
+figure_prcp <-
+ ggplot(precip_doy,aes(x=doy,y=precip_mm)) + 
+  geom_line(color="blue") +
+  theme_base() + 
+  scale_color_few() +
+  labs(x='Day of Year', y="Precipitation (mm)") +
+  facet_wrap(~year)
+
+print(figure_prcp)
+}
+
+years <- c(2005:2011)
+
+for (yr in years){
+  plot_figure_prcp(met_data_full, year)
+}
+
+```

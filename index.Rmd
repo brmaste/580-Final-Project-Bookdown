@@ -1,9 +1,14 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAME HERE"
+title: "580 Final Project Bookdown"
+author: "Brian Steen"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
-# Down the rabbit-hole
+# Introduction
 
+```{r library install, eval=FALSE}
+install.packages("bookdown")
+
+
+```

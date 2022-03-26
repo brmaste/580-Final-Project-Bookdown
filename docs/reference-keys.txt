@@ -13,3 +13,12 @@ dygraph-example
 poudre-paragraph
 presentation-version-link
 introduction
+hayman-fire-recovery
+question-1
+question-2
+question-3
+question-4
+question-5
+bonus-question
+spread
+gather

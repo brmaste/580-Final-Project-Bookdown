@@ -121,7 +121,7 @@ snow_data_full <- map_dfr(snow_files,our_snow_reader)
 
 #### Plot snow data
 
-```{r}
+```{r snow plot}
 snow_yearly <- snow_data_full %>%
   group_by(Year,site) %>%
   summarize(mean_height = mean(Sno_Height_M,na.rm=T))
@@ -235,7 +235,7 @@ Make a line plot of mean temp by year by site (using the `air temp [K]` variable
 
 *Some of the sensors seemed to be offline during 2003-2004 which was affecting the temperature sensor. These years were filtered out.* *Air temperature across both Senator Beck and Swamp Angel sites show increases in temperature during the period of record. Similarity in temperature patterns are likely due to the sites' proximity to each other.*
 
-```{r, warning=F,message=F}
+```{r temp year by site, warning=F,message=F}
 
 mean_a_t_k <- met_data_full %>%
   rename(air_temp_K = "air temp [K]") %>%
@@ -244,7 +244,7 @@ mean_a_t_k <- met_data_full %>%
   summarize(mean_a_t_k = mean(air_temp_K,na.rm=T))
 
 ggplot(mean_a_t_k,aes(x=year,y=mean_a_t_k,color=siteID)) + 
-  geom_point(size = 3) +
+  geom_line(size = 1) +
   theme_base() + 
   scale_color_few() +
   geom_smooth(method=lm) +
@@ -260,7 +260,7 @@ Hint: https://ggplot2.tidyverse.org/reference/print.ggplot.html
 
 *Both Swamp Angel Senator Beck sites demonstrate temperature fluctuation typical of high elevation locations in the northern hemisphere. Similarity in temperature patterns are likely due to the sites' proximity to each other.*
 
-```{r, warning=F,message=F}
+```{r function, warning=F,message=F}
 
 plot_figure_k <- function(df, year) {
 mean_month_a_t_k <- df %>%
@@ -296,7 +296,7 @@ Make a plot of average daily precipitation by day of year (averaged across all a
 
 *Site specific precipitation was unavailable, so the precipitation shown is for both Senator Beck and Swamp Angel study sites. Average precipitation follows a typical annual cycle for the Southern Rocky Mountains, with higher seasonal precipitation in the late summer.* 
 
-```{r, warning=F,message=F}
+```{r average precip, warning=F,message=F}
 
 precip <- met_data_full %>% 
   mutate(date = make_date(year, month, day)) %>% 
@@ -320,7 +320,7 @@ Use a function and for loop to create yearly plots of precipitation by day of ye
 
 *Site specific precipitation was unavailable, so the precipitation shown is for both Senator Beck and Swamp Angel study sites. Precipitation for 2005-2011 follows a typical annual cycle for the Southern Rocky Mountains, with higher seasonal precipitation in mid to late summer.*
 
-```{r, warning=F,message=F}
+```{r precip year, warning=F,message=F}
 
 plot_figure_prcp <- function(df, year) {
 precip_doy <- df %>%

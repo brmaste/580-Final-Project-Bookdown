@@ -142,7 +142,7 @@ What is the distribution of lake size in Iowa vs. Minnesota?
 y axis (check out geom_histogram)
 
 *Minnesota has a much larger distribution of lakes at all sizes than Iowa, with the largest lakes being nearly five times the largest size of Iowa.* 
-```{r, warning=F,message=F}
+```{r iowa lakes minn, warning=F,message=F}
 
 # Using st_join to join the spatial object and sf dataframes. 
 # subsetting states

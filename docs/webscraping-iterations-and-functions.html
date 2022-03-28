@@ -388,7 +388,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb16-3"><a href="webscraping-iterations-and-functions.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  ggthemes<span class="sc">::</span><span class="fu">theme_few</span>() <span class="sc">+</span> </span>
 <span id="cb16-4"><a href="webscraping-iterations-and-functions.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  ggthemes<span class="sc">::</span><span class="fu">scale_color_few</span>()</span></code></pre></div>
 <pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/snow%20plot-1.png" width="672" /></p>
 </div>
 </div>
 </div>
@@ -924,12 +924,12 @@ SA
 <span id="cb26-5"><a href="webscraping-iterations-and-functions.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_a_t_k =</span> <span class="fu">mean</span>(air_temp_K,<span class="at">na.rm=</span>T))</span>
 <span id="cb26-6"><a href="webscraping-iterations-and-functions.html#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-7"><a href="webscraping-iterations-and-functions.html#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mean_a_t_k,<span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>mean_a_t_k,<span class="at">color=</span>siteID)) <span class="sc">+</span> </span>
-<span id="cb26-8"><a href="webscraping-iterations-and-functions.html#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb26-8"><a href="webscraping-iterations-and-functions.html#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb26-9"><a href="webscraping-iterations-and-functions.html#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_base</span>() <span class="sc">+</span> </span>
 <span id="cb26-10"><a href="webscraping-iterations-and-functions.html#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_few</span>() <span class="sc">+</span></span>
 <span id="cb26-11"><a href="webscraping-iterations-and-functions.html#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm) <span class="sc">+</span></span>
 <span id="cb26-12"><a href="webscraping-iterations-and-functions.html#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&#39;Year&#39;</span>, <span class="at">y=</span><span class="st">&quot;Air Temperature [K]&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/temp%20year%20by%20site-1.png" width="672" /></p>
 </div>
 <div id="question-6" class="section level3 hasAnchor" number="4.2.6">
 <h3><span class="header-section-number">4.2.6</span> Question 6:<a href="webscraping-iterations-and-functions.html#question-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -960,7 +960,7 @@ Hint: <a href="https://ggplot2.tidyverse.org/reference/print.ggplot.html" class=
 <span id="cb27-22"><a href="webscraping-iterations-and-functions.html#cb27-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (yr <span class="cf">in</span> years){</span>
 <span id="cb27-23"><a href="webscraping-iterations-and-functions.html#cb27-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_figure_k</span>(met_data_full, year)</span>
 <span id="cb27-24"><a href="webscraping-iterations-and-functions.html#cb27-24" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-12-1.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-12-2.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-12-3.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-12-4.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-12-5.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-12-6.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-12-7.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/function-1.png" width="672" /><img src="bookdownproj_files/figure-html/function-2.png" width="672" /><img src="bookdownproj_files/figure-html/function-3.png" width="672" /><img src="bookdownproj_files/figure-html/function-4.png" width="672" /><img src="bookdownproj_files/figure-html/function-5.png" width="672" /><img src="bookdownproj_files/figure-html/function-6.png" width="672" /><img src="bookdownproj_files/figure-html/function-7.png" width="672" /></p>
 </div>
 </div>
 <div id="bonus" class="section level2 hasAnchor" number="4.3">
@@ -982,7 +982,7 @@ Hint: <a href="https://ggplot2.tidyverse.org/reference/print.ggplot.html" class=
 <span id="cb28-11"><a href="webscraping-iterations-and-functions.html#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">color=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
 <span id="cb28-12"><a href="webscraping-iterations-and-functions.html#cb28-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_base</span>() <span class="sc">+</span> </span>
 <span id="cb28-13"><a href="webscraping-iterations-and-functions.html#cb28-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&#39;Day of Year&#39;</span>, <span class="at">y=</span><span class="st">&quot;Average Precipitation (mm)&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/average%20precip-1.png" width="672" /></p>
 </div>
 <div id="bonus-2" class="section level3 hasAnchor" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> Bonus 2:<a href="webscraping-iterations-and-functions.html#bonus-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1014,7 +1014,7 @@ Hint: <a href="https://ggplot2.tidyverse.org/reference/print.ggplot.html" class=
 <span id="cb29-24"><a href="webscraping-iterations-and-functions.html#cb29-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (yr <span class="cf">in</span> years){</span>
 <span id="cb29-25"><a href="webscraping-iterations-and-functions.html#cb29-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_figure_prcp</span>(met_data_full, year)</span>
 <span id="cb29-26"><a href="webscraping-iterations-and-functions.html#cb29-26" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-14-1.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-14-2.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-14-3.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-14-4.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-14-5.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-14-6.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-14-7.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/precip%20year-1.png" width="672" /><img src="bookdownproj_files/figure-html/precip%20year-2.png" width="672" /><img src="bookdownproj_files/figure-html/precip%20year-3.png" width="672" /><img src="bookdownproj_files/figure-html/precip%20year-4.png" width="672" /><img src="bookdownproj_files/figure-html/precip%20year-5.png" width="672" /><img src="bookdownproj_files/figure-html/precip%20year-6.png" width="672" /><img src="bookdownproj_files/figure-html/precip%20year-7.png" width="672" /></p>
 
 </div>
 </div>

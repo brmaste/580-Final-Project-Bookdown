@@ -121,7 +121,7 @@ sites with at least 200 observations?
 
 - Here, I just want a plot of chla vs secchi for all sites 
 
-```{r, warning=F,message=F}
+```{r secchi v chlor, warning=F,message=F}
 
 ggplot(chla_secchi_200,aes(x=chla,y=secchi)) + 
   geom_point(size = 0.5, color = 'dark green') +

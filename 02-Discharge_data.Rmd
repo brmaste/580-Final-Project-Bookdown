@@ -52,7 +52,7 @@ q <- readNWISdv(siteNumbers = '06752260',
 #### Static Data Plotter
 
 
-```{r, warning = FALSE, fig.width = 8, fig.height = 5}
+```{r Static, warning = FALSE, fig.width = 8, fig.height = 5}
 
 ggplot(q, aes(x = Date, y = q)) + 
   geom_line() + 
@@ -65,7 +65,7 @@ ggplot(q, aes(x = Date, y = q)) +
 #### Interactive Data Plotter
 
 
-```{r}
+```{r data plotter}
 
 q_xts <- xts(q$q, order.by = q$Date)
 
@@ -112,7 +112,7 @@ todays date, not just a static date you enter.
 
 ### DyGraph example 
 
-```{r}
+```{r dygraph}
 
 q_xts <- xts(q$q, order.by = q$Date)
 

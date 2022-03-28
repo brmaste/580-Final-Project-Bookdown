@@ -1,6 +1,8 @@
 # Regressions using yield and temperature data
 
-*Composed by Nathan Mueller*
+*The fifth assignment had students using PRISM daily data using linear and multiple regression to analyze different variables related to crop yields in Iowa.* 
+
+*Composed by Nathan Mueller.*
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -159,6 +161,7 @@ Extract Winneshiek County corn yields, fit a linear time trend, make a plot. Is 
 winne_corn <- cornyields %>% 
   filter(county_name == "WINNESHIEK")
 
+#plot
 ggplot(winne_corn, mapping = aes(x = year, y = yield)) +
   geom_point() +
   theme_bw() +
@@ -166,6 +169,7 @@ ggplot(winne_corn, mapping = aes(x = year, y = yield)) +
   geom_smooth(method = lm) +
   labs(title = "Average Corn Yield by Year, Winneshiek County, IA", subtitle = "Linear Trend")
 
+# linear regression
 lm_winne_corn <- lm(yield ~ year, winne_corn)
 summary(lm_winne_corn)
 
@@ -333,6 +337,7 @@ county_summer_yield_panel$county_ansi <- as.factor(county_summer_yield_panel$cou
 # Squares the tmax value
 county_summer_yield_panel$meantmaxsq <- county_summer_yield_panel$meantmax^2
 
+# multiple regression
 lm_county_summer_yield_panel <- lm(yield ~ county_ansi + meantmax + meantmaxsq + year, county_summer_yield_panel)
 
 summary(lm_county_summer_yield_panel)
@@ -400,7 +405,7 @@ summary(lm_clinton_soy)
 clinton_soy$fitted <- lm_clinton_soy$fitted.values
 
 geom_line(mapping = aes(x = year, y = fitted, color = "Year"), size = 1) 
-
+#Plot
 ggplot(clinton_soy, mapping = aes(x = year, y = yield)) +
   geom_line(mapping = aes(x = year, y = fitted), color = "red", size = 1) +
   geom_point() +

@@ -1,6 +1,8 @@
 # Geospatial 1
 
-*Composed by Matt Ross*
+*The fourth assignment was in two parts, with the first part using* [LAGOS lake data](https://lagoslakes.org/) *and mapping water quality variables for spatial analysis.* 
+
+*Composed by Matt Ross.*
 
 ```{r setup, include=FALSE}
 library(tidyverse) # Tidy packages

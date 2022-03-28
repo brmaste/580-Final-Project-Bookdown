@@ -1,6 +1,8 @@
 # Discharge Data Example
 
-*Composed by Matt Ross*
+*This was the first assignment for the course, where students were asked to create a Github account and then answer a couple basic questions about river discharge using Rmarkdown.* 
+
+*Assignment composed by Matt Ross.*
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -13,7 +15,7 @@ library(revealjs)
 ```
 
 
-## Methods
+## Example & Methods
 
 The Poudre River at Lincoln Bridge is:
 
@@ -114,9 +116,9 @@ todays date, not just a static date you enter.
 
 ```{r dygraph}
 
-q_xts <- xts(q$q, order.by = q$Date)
+q_xts <- xts(q$q, order.by = q$Date) #creates a df where you order by date for a dygraph
 
-dygraph(q_xts) %>%
+dygraph(q_xts) %>% #dygraph with labels
   dyAxis("y", label = "Discharge (cfs)") %>% 
   dyOptions(drawPoints = TRUE, pointSize = 3) %>% 
   dySeries("V1", strokeWidth = 2, strokePattern = "dashed")

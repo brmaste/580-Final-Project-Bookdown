@@ -1,6 +1,8 @@
 # Hayman Fire Recovery
+
+*For the second assignment, students looked at different indices to determine the effect snow and moisture had upon vegetation after a forest fire.* 
  
-*Composed by Matt Ross* 
+*Composed by Matt Ross.* 
  
 ```{r setup, warning=F,message=F, include=F}
 library(tidyverse)

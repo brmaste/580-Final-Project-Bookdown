@@ -1,5 +1,9 @@
 # Geospatial 2
 
+*The second part of the fourth assignment again had students using* [LAGOS lake data](https://lagoslakes.org/) *and mapping water quality variables for spatial analysis.* 
+
+*Composed by Matt Ross.*
+
 ```{r setup, include=FALSE}
 library(tidyverse) # Tidy packages
 library(sf) #Spatial package that can read and create shapefiles 
@@ -122,7 +126,7 @@ sites with at least 200 observations?
 - Here, I just want a plot of chla vs secchi for all sites 
 
 ```{r secchi v chlor, warning=F,message=F}
-
+#a plot of chla vs secchi for all sites
 ggplot(chla_secchi_200,aes(x=chla,y=secchi)) + 
   geom_point(size = 0.5, color = 'dark green') +
   geom_smooth(method = lm) +

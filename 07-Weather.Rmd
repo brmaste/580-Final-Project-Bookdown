@@ -154,7 +154,7 @@ Extract Winneshiek County corn yields, fit a linear time trend, make a plot. Is 
 
 *The trend over the period of record shows a positive relationship between the yield of corn produced over time in Winneshiek, IA. The relevant statistic show the trend to be significant (p-value: 1.767e-13) with an R-squared of 0.749.*
 
-```{r, warning=F,message=F}
+```{r Winneshiek linear, warning=F,message=F}
 #Filtering for Winneshiek county
 winne_corn <- cornyields %>% 
   filter(county_name == "WINNESHIEK")
@@ -177,7 +177,7 @@ Fit a quadratic time trend (i.e., year + year^2) and make a plot. Is there evide
 
 *The quadratic time trend shows an increase in the amount of corn yield over the period of record. The relevant statistic show the trend to be significant (p-value: 2.311e-12) with an R-squared of 0.743.*
 
-```{r, warning=F,message=F}
+```{r Winneshiek quadratic, warning=F,message=F}
 
 # Squares the year value
 winne_corn$yearsq <- winne_corn$year^2
@@ -205,7 +205,7 @@ ggplot(winne_corn) +
 
 *In comparing average summer temperature to corn yield, the trend peaks and decreases around 27°C, suggesting that for the corn yield in Winneshiek county that corn yield decreases beyond a 27°C threshold (R-squared 0.7249, p-value: 7.584e-12). Adding year to the plot shows no demonstrable trend (Multiple and adjusted R-squared:  0.1984, p-value: 0.007).*
 
-```{r, warning=F,message=F}
+```{r Winneshiek temp, warning=F,message=F}
 
 #Want to join the tmaxdf to the corn yields df, then plot the two of them together... 
 
@@ -258,7 +258,7 @@ ggplot(winn_summer_corn_temp) +
 
 *For 2018, the corn yield for all counties in Iowa had a negative trend for an increase in temperature. The trend is not significant however, and weakly correlated (Adjusted R-squared: 0.02687, p-value: 0.063).* 
 
-```{r, warning=F,message=F}
+```{r temp v yield all, warning=F,message=F}
 
 # Want yield for all counties, 2018:
 county_yield <- cornyieldsall %>% 
@@ -300,7 +300,7 @@ summary(lm_county_summer_yield)
 
 *Including the temperature coefficients, year and county into the fitted yield shows a plot with increased potential output compared to the actual yield. While the fitted yield has a larger spread including some below 50 BPA, the majority of the spread is larger than 150 for the fitted yield, whereas half of the actual yield appears to be less than 175 BPA. Thus, the temperature and year by county has a significant positive influence upon the corn yield for the time series (R-squared: 0.6493, p-value: < 2.2e-16).*  
 
-```{r, warning=F,message=F}
+```{r regression, warning=F,message=F}
 
 # Want yield for all counties, all years:
 county_yield_panel <- cornyieldsall %>% 
@@ -375,7 +375,7 @@ params2 <- list(commodity_desc = "SOYBEANS", statisticcat_desc= "YIELD", prodn_p
 soyyieldsall <- nassqs_yields(params2)
 ```
 
-```{r, warning=F,message=F}
+```{r clinton yield, warning=F,message=F}
 #str(soyyieldsall)
 
 soyyieldsall$county_ansi <- as.numeric(soyyieldsall$county_ansi)
@@ -418,7 +418,7 @@ Find a package to make a county map of Iowa displaying some sort of information 
 
 *Figure shows 1986 soybean yields (bushels per acre). That year Clark County had a lower than average yield (29.3 BPA), while Scott County had the highest (46.9 BPA). Both the upper and lower regions of the state experienced comparatively lower yields than the middle region.*
 
-```{r}
+```{r iowa soybean}
 
 #Downloading Iowa County SF 
 iowa <- us_counties(states = "Iowa")

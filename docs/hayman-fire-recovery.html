@@ -316,7 +316,7 @@ You should exclude winter months and focus on summer months</p>
 <span id="cb2-12"><a href="hayman-fire-recovery.html#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_base</span>() <span class="sc">+</span></span>
 <span id="cb2-13"><a href="hayman-fire-recovery.html#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.8</span>,<span class="fl">0.6</span>)) <span class="sc">+</span></span>
 <span id="cb2-14"><a href="hayman-fire-recovery.html#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&#39;NDMI&#39;</span>, <span class="at">y=</span><span class="st">&quot;NDVI&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/ndvi%20vs%20ndmi-1.png" width="672" /></p>
 </div>
 <div id="question-2" class="section level3 hasAnchor" number="3.1.2">
 <h3><span class="header-section-number">3.1.2</span> Question 2:<a href="hayman-fire-recovery.html#question-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -352,7 +352,7 @@ growth for the following summer?</li>
 <span id="cb9-5"><a href="hayman-fire-recovery.html#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.85</span>,<span class="fl">0.3</span>)) <span class="sc">+</span></span>
 <span id="cb9-6"><a href="hayman-fire-recovery.html#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&#39;Average NDSI&#39;</span>, <span class="at">y=</span><span class="st">&quot;Average NDVI&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/ndsi%20v%20ndvi-1.png" width="672" /></p>
 </div>
 <div id="question-3" class="section level3 hasAnchor" number="3.1.3">
 <h3><span class="header-section-number">3.1.3</span> Question 3:<a href="hayman-fire-recovery.html#question-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -369,7 +369,7 @@ and burned and unburned?</p>
 <span id="cb11-8"><a href="hayman-fire-recovery.html#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_base</span>() <span class="sc">+</span></span>
 <span id="cb11-9"><a href="hayman-fire-recovery.html#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>pre_post) <span class="sc">+</span></span>
 <span id="cb11-10"><a href="hayman-fire-recovery.html#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&#39;Average NDSI&#39;</span>, <span class="at">y=</span><span class="st">&quot;Average NDVI&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/snow%20pre%20post-1.png" width="672" /></p>
 </div>
 <div id="question-4" class="section level3 hasAnchor" number="3.1.4">
 <h3><span class="header-section-number">3.1.4</span> Question 4:<a href="hayman-fire-recovery.html#question-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -386,7 +386,7 @@ and burned and unburned?</p>
 <span id="cb12-9"><a href="hayman-fire-recovery.html#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="at">width=</span><span class="fl">0.5</span>, <span class="at">fill=</span><span class="st">&quot;dark green&quot;</span>) <span class="sc">+</span></span>
 <span id="cb12-10"><a href="hayman-fire-recovery.html#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_base</span>() <span class="sc">+</span></span>
 <span id="cb12-11"><a href="hayman-fire-recovery.html#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&#39;Month&#39;</span>, <span class="at">y=</span><span class="st">&quot;Average NDVI&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/greenest%20month-1.png" width="672" /></p>
 </div>
 <div id="question-5" class="section level3 hasAnchor" number="3.1.5">
 <h3><span class="header-section-number">3.1.5</span> Question 5:<a href="hayman-fire-recovery.html#question-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -403,7 +403,7 @@ and burned and unburned?</p>
 <span id="cb13-9"><a href="hayman-fire-recovery.html#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="at">width=</span><span class="fl">0.5</span>, <span class="at">fill=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
 <span id="cb13-10"><a href="hayman-fire-recovery.html#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_base</span>() <span class="sc">+</span></span>
 <span id="cb13-11"><a href="hayman-fire-recovery.html#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&#39;Month&#39;</span>, <span class="at">y=</span><span class="st">&quot;Average NDSI&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/snowiest-1.png" width="672" /></p>
 </div>
 <div id="bonus-question" class="section level3 hasAnchor" number="3.1.6">
 <h3><span class="header-section-number">3.1.6</span> Bonus Question:<a href="hayman-fire-recovery.html#bonus-question" class="anchor-section" aria-label="Anchor link to header"></a></h3>

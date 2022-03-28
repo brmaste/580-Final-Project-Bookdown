@@ -54,7 +54,7 @@ You should exclude winter months and focus on summer months
 
 *When the NDMI value increases, the NDVI increases as well. While the NDMI was at or below zero for most of the burned site, the NDVI largely does not extend past 0.35. In contrast, NDMI values begin below 0 for the unburned site and extends to about 0.2, with NDVI values ranging between 0.35 and 0.55. The figure suggests that unburned site with its higher vegetation index is able to retain moisture better than the burned site.*   
 
-```{r}
+```{r ndvi vs ndmi}
 
 #Converts the long format to wide, removes the resulting NAs from the df. 
 full_wide <- spread(full_long, data, value) %>%
@@ -82,7 +82,7 @@ In other words, does the previous year's snow cover influence vegetation
 
 *Both sites demonstrate relatively flat trends between average winter NDSI and average summer NDVI. The difference between the two sites suggests that the amount of winter snow is not as important as a site having enough vegetation to sustain a higher summer NDVI.* 
 
-```{r}
+```{r ndsi v ndvi}
 
 #For this, I want average NDSI for Jan-Apr, and average NDVI for Jun-Aug
 #Winter
@@ -119,7 +119,7 @@ and burned and unburned?
 
 *At both sites, the average winter NDSI had little effect upon NDVI. After the fire, the burned site no longer had any vegetation to sustain, regardless of NDSI, so the NDVI is lower than the unburned site.*
 
-```{r}
+```{r snow pre post}
 
 #Want a facet wrap of the previous data splitting the difference between pre/post fire
 
@@ -140,7 +140,7 @@ What month is the greenest month on average?
 
 *For the period of record for both sites, August is the greenest month with September not lagging far behind.*
 
-```{r}
+```{r greenest month}
 
 # Mutate by month, then find the average NDVI. Bar chart. 
 
@@ -162,7 +162,7 @@ What month is the snowiest on average?
 
 *January on average is the snowiest month for the period of record.*
 
-```{r}
+```{r snowiest}
 
 #Mutate by month, then find the average NDSI. Bar chart. 
 
